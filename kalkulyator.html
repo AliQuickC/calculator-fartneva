@@ -409,6 +409,23 @@
      <label for="ch54"><input id="ch54" type="checkbox">Сборка на участке</label></td><td class="c-price">45000</td></tr>
     
 
+		<tr class="for-metal hidden">
+			<td class="c-name">
+				<fieldset style="margin-bottom: 6px; border-radius: 3px;">
+					<legend>Размер:</legend>
+					<input type="radio" name="metal-size" id="ch55" data-price="1">
+					<label for="ch55">2,4м. x 2,4м.</label>
+					<input type="radio" name="metal-size" id="ch56" data-price="2">
+					<label for="ch56">2,4м. x 4м.</label>
+					<input type="radio" name="metal-size" id="ch57" data-price="3">
+					<label for="ch57">2,4м. x 6м.</label>
+					<input type="radio" name="metal-size" id="ch58" data-price="4">
+					<label for="ch58">2,4м. x 8м.</label>
+				</fieldset>
+			</td>
+			<td class="c-price">1</td>
+		</tr>
+
         <tr class="c-p-itogo">
             <td class="c-name c-itog">Итого:</td>
             <td id="c-price-itog"></td>
@@ -469,6 +486,7 @@ $(".calk").find('a').click(function(){
                 $(".for-metal").removeClass("hidden");
                 $(".for-derevo").find("input").attr("checked",false);
             }
+						$("#custom-order").find('input[name="metal-size"]')[2].checked = "checked"; // инициализация, выбор активно radio button
         }
     }
     myCalc();
@@ -484,6 +502,14 @@ $("#order-table2").on("focus", "input", function(){$(this).css("border","");});
 
 /* пересчет цены */
 function myCalc(){
+
+		// запись значения в .c-price, из активного radio button, читает значение из data-price
+		let selectMetalRadio = $("#custom-order").find('input[name="metal-size"]:checked')[0];
+		if(selectMetalRadio) {
+			let metalSizePrice = $(selectMetalRadio).data('price');
+			$(selectMetalRadio).parent().parent().parent().children(".c-price").text(metalSizePrice);
+		}
+
     var input = $("#custom-order").find("input");
     if(!input.checked){input.parent().parent().removeClass("activetr");}
     var itogo = 0;
