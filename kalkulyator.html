@@ -274,17 +274,17 @@
     <tr>
         <td class="calk-level2">
             <ul>
-                <li><a href="javascript:void(0)" class="show-for-derevo" data-src='images/bk-01.jpg' data-price='67000'>Деревянная бытовка без перегородки</a></li>
-                <li><a href="javascript:void(0)" class="show-for-derevo" data-src='images/bk-02.jpg' data-price='77000'>Деревянная бытовка с прямой перегородкой</a></li>
-                <li><a href="javascript:void(0)" class="show-for-derevo" data-src='images/bt-03.jpg' data-price='97000'>Деревянная бытовка с двойной перегородкой</a></li>
+                <li><a href="javascript:void(0)" class="show-for-derevo" data-src='images/bk-01.jpg' data-price='67000' data-changehouse="type1">Деревянная бытовка без перегородки</a></li>
+                <li><a href="javascript:void(0)" class="show-for-derevo" data-src='images/bk-02.jpg' data-price='77000' data-changehouse="type2">Деревянная бытовка с прямой перегородкой</a></li>
+                <li><a href="javascript:void(0)" class="show-for-derevo" data-src='images/bt-03.jpg' data-price='97000' data-changehouse="type3">Деревянная бытовка с двойной перегородкой</a></li>
             </ul>
         </td>
         
         <td class="calk-level2">
             <ul>
-                <li><a href="javascript:void(0)" class="show-for-metal" data-src='images/bk-01.jpg' data-price='113800'>Металлическая бытовка без перегородки</a></li>
-                <li><a href="javascript:void(0)" class="show-for-metal" data-src='images/bk-02.jpg' data-price='123800'>Металлическая бытовка с прямой перегородкой</a></li>
-                <li><a href="javascript:void(0)" class="show-for-metal" data-src='images/bt-03.jpg' data-price='133800'>Металлическая бытовка с двойной перегородкой</a></li>
+                <li><a href="javascript:void(0)" class="show-for-metal" data-src='images/bk-01.jpg' data-price='113800' data-changehouse="metalWithoutPartition">Металлическая бытовка без перегородки</a></li>
+                <li><a href="javascript:void(0)" class="show-for-metal" data-src='images/bk-02.jpg' data-price='123800' data-changehouse="metalWithStraightPartition">Металлическая бытовка с прямой перегородкой</a></li>
+                <li><a href="javascript:void(0)" class="show-for-metal" data-src='images/bt-03.jpg' data-price='133800' data-changehouse="metalWithDoublePartition">Металлическая бытовка с двойной перегородкой</a></li>
             </ul>
         </td>
     </tr>
@@ -300,6 +300,32 @@
         </tr>
     </thead>
     <tbody>
+
+		<tr class="for-metal hidden">
+			<td class="c-name">
+				<fieldset style="border-radius: 3px; cursor: default; display: flex; flex-wrap: wrap; column-gap: 10px;">
+					<legend>Размер:</legend>
+					<label for="ch55">
+						<input type="radio" name="metal-size" id="ch55" data-size="2,4x2,4" data-price="">
+						2,4м. x 2,4м.
+					</label>
+					<label for="ch56">
+						<input type="radio" name="metal-size" id="ch56" data-size="2,4x4" data-price="">
+						2,4м. x 4м.
+					</label>
+					<label for="ch57">
+						<input type="radio" name="metal-size" id="ch57" data-size="2,4x6" data-price="">
+						2,4м. x 6м.
+					</label>
+					<label for="ch58">
+						<input type="radio" name="metal-size" id="ch58" data-size="2,4x8" data-price="">
+						2,4м. x 8м.
+					</label>
+				</fieldset>
+			</td>
+			<td class="c-price">1</td>
+		</tr>
+
 <tr class="for-derevo hidden"><td class="c-name"><label for="ch1"><input id="ch1" type="checkbox">Окно деревянное глухое (шт)</label></td><td class="c-price">4000</td></tr>
 <tr class="for-derevo hidden"><td class="c-name"><label for="ch2"><input id="ch2" type="checkbox">Окно деревянное открывающееся 1 остекление (шт)</label></td><td class="c-price">5000</td></tr>
 <tr class="for-derevo hidden"><td class="c-name">
@@ -407,24 +433,6 @@
     <label for="ch53"><input id="ch53" type="checkbox">Сварная крыша</label></td><td class="c-price">20000</td></tr>
 <tr class="for-metal hidden"><td class="c-name">
      <label for="ch54"><input id="ch54" type="checkbox">Сборка на участке</label></td><td class="c-price">45000</td></tr>
-    
-
-		<tr class="for-metal hidden">
-			<td class="c-name">
-				<fieldset style="margin-bottom: 6px; border-radius: 3px;">
-					<legend>Размер:</legend>
-					<input type="radio" name="metal-size" id="ch55" data-price="1">
-					<label for="ch55">2,4м. x 2,4м.</label>
-					<input type="radio" name="metal-size" id="ch56" data-price="2">
-					<label for="ch56">2,4м. x 4м.</label>
-					<input type="radio" name="metal-size" id="ch57" data-price="3">
-					<label for="ch57">2,4м. x 6м.</label>
-					<input type="radio" name="metal-size" id="ch58" data-price="4">
-					<label for="ch58">2,4м. x 8м.</label>
-				</fieldset>
-			</td>
-			<td class="c-price">1</td>
-		</tr>
 
         <tr class="c-p-itogo">
             <td class="c-name c-itog">Итого:</td>
@@ -458,7 +466,13 @@ E-mail или Телефон для связи"></td>
 
 <script type="text/javascript">
 $(document).ready(function(){
-    
+
+	const priceForSize = {
+		metalWithoutPartition: {'2,4x2,4': 1, '2,4x4': 2, '2,4x6': 3, '2,4x8': 4},
+		metalWithStraightPartition: {'2,4x2,4': 5, '2,4x4': 6, '2,4x6': 7, '2,4x8': 8},
+		metalWithDoublePartition: {'2,4x2,4': 9, '2,4x4': -2, '2,4x6': -3, '2,4x8': -4},
+	}
+
 $(".calk").find('a').click(function(){
     var t = $(this);
     var tp = t.parents('td');
@@ -486,7 +500,13 @@ $(".calk").find('a').click(function(){
                 $(".for-metal").removeClass("hidden");
                 $(".for-derevo").find("input").attr("checked",false);
             }
-						$("#custom-order").find('input[name="metal-size"]')[2].checked = "checked"; // инициализация, выбор активно radio button
+
+						$("#custom-order").find('input[name="metal-size"]').each(function(index){ // инициализация, значение price для всех radio button
+							var radioDataSizes = priceForSize[t.attr('data-changehouse')];
+							var priceValue = radioDataSizes[$(this).attr('data-size')]
+							$(this).attr('data-price', priceValue);
+						});
+						$("#custom-order").find('input[name="metal-size"]')[2].checked = "checked"; // инициализация, выбор активной radio button
         }
     }
     myCalc();
@@ -503,12 +523,17 @@ $("#order-table2").on("focus", "input", function(){$(this).css("border","");});
 /* пересчет цены */
 function myCalc(){
 
+	var selectMetalRadio = $("#custom-order").find('input[name="metal-size"]:checked')[0];
+	if(selectMetalRadio) {
+		var metalSizePrice = $(selectMetalRadio).attr('data-price');
 		// запись значения в .c-price, из активного radio button, читает значение из data-price
-		let selectMetalRadio = $("#custom-order").find('input[name="metal-size"]:checked')[0];
-		if(selectMetalRadio) {
-			let metalSizePrice = $(selectMetalRadio).data('price');
-			$(selectMetalRadio).parent().parent().parent().children(".c-price").text(metalSizePrice);
-		}
+		$(selectMetalRadio).closest('tr').children(".c-price").text(metalSizePrice);
+
+		const activeLink = $(".calk a.active")[0];
+		// базовая цена = базовая цена из data атр. пункта выбора бытовки + цена из группы radio button размеров
+		const basePrice = +$(activeLink).attr('data-price') + +metalSizePrice;
+		$('.info-price').html(basePrice);
+	}
 
     var input = $("#custom-order").find("input");
     if(!input.checked){input.parent().parent().removeClass("activetr");}
@@ -517,7 +542,7 @@ function myCalc(){
      console.log(':',itogo); // это
     $("#custom-order").find("input:checked").each(function(){
        
-        itogo += parseInt($(this).parent().parent().parent().children(".c-price").text());
+        itogo += parseInt($(this).closest('tr').children(".c-price").text());
        // itogo += parseInt($(this).parent().text());// это
          console.log(':',itogo); // это
     });
